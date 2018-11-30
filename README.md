@@ -2,6 +2,12 @@
 
 Awesome calendar for your React App. 
 
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/peeyush-sahu/react-pure-calendar/graphs/commit-activity)
+
+[![GitHub license](https://img.shields.io/github/license/peeyush-sahu/react-pure-calendar.svg)](https://github.com/peeyush-sahu/react-pure-calendar/blob/master/LICENSE)
+
+[![GitHub release](https://img.shields.io/github/release/peeyush-sahu/react-pure-calendar.svg)](https://GitHub.com/peeyush-sahu/react-pure-calendar/releases/)
+
 ## Installation
 
 React-Pure-Calendar is available as an [npm package](https://www.npmjs.org/package/react-pure-calendar).
