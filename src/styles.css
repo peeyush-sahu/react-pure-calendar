@@ -1,0 +1,212 @@
+* {
+    text-decoration: none;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.calendarCont {
+    width: 280px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    position: relative;
+    font-size: 14px;
+    display: inline-block;
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+}
+
+.c_cell {
+    display: block;
+    margin: 0 auto;
+    color: rgba(0, 0, 0, 0.65);
+    border-radius: 2px;
+    width: 24px;
+    height: 24px;
+    line-height: 22px;
+    border: 1px solid transparent;
+    padding: 0;
+    background: transparent;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.c_cell:hover {
+    background: #e6f7ff;
+}
+
+.currDate {
+    border-color: #1890ff;
+    font-weight: 500;
+    color: #1890ff;
+    background: #d1e9ff;
+}
+
+.selectedDate {
+    background: #1890ff;
+    color: #fff;
+    border: 1px solid transparent;
+}
+
+.c_cell.selectedDate:hover {
+    background: #1890ff;
+}
+
+.monthsCont,
+.yearsCont {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    visibility: hidden;
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    transition: all 0.3s ease-in-out;
+    background-color: #ffffff;
+}
+
+.monthsCont.show,
+.yearsCont.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.monthsCont a,
+.yearsCont a {
+    width: 33%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+}
+
+.monthsCont a.currMonth span,
+.yearsCont a.currYear span {
+    text-align: center;
+    height: 24px;
+    line-height: 24px;
+    padding: 0 8px;
+    border-radius: 2px;
+    display: inline-block;
+    margin: 0 auto;
+    background: #1890ff;
+    color: #fff;
+    border: 1px solid transparent;
+}
+
+.calendarHeader {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.link {
+    display: flex;
+    font-weight: 500;
+    color: #000000;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease-in-out;
+}
+
+.link:hover {
+    color: #1890ff;
+}
+
+.monthLink {
+    margin-right: 0.25rem;
+}
+
+.btn {
+    border: 0;
+    background: #0000;
+    font-size: 1rem;
+    width: 40px;
+    height: 40px;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    outline: none;
+}
+
+#prevYearsBtn.btn::after,
+#prevMonthBtn.btn::after {
+    content: "\2039";
+}
+
+#nextYearsBtn.btn::after,
+#nextMonthBtn.btn::after {
+    content: "\203A";
+}
+
+#prevYearBtn.btn::after {
+    content: "\AB";
+}
+
+#nextYearBtn.btn::after {
+    content: "\BB";
+}
+
+.btn:last-child {
+    margin-right: 0;
+}
+
+.rowEnd {
+    display: flex;
+    align-items: center;
+}
+
+.calendarBody {
+    padding: 8px 12px;
+    position: relative;
+}
+
+.calendarTable {
+    border-spacing: 0;
+    border-collapse: collapse;
+    max-width: 100%;
+    background-color: transparent;
+    width: 100%;
+}
+
+.calendarTable th {
+    line-height: 18px;
+    width: 33px;
+    padding: 6px 0;
+    text-align: center;
+    font-weight: 400;
+}
+
+.calendarTable td {
+    padding: 3px 0;
+    height: 30px;
+}
+
+.todayCont {
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 14px;
+    color: #1890ff;
+    border-top: 1px solid #e8e8e8;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+.disabled.c_cell {
+    cursor: not-allowed;
+    color: #aaaaaa;
+    background: #f5f5f5;
+}
