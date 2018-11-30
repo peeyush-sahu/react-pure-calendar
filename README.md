@@ -11,6 +11,10 @@ npm install react-pure-calendar
 
 Default styles included in styles.css
 
+## Demo
+
+[![Edit React Pure Calendar Demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/20qk766qwn)
+
 ## How to Use
 
 ```javascript
