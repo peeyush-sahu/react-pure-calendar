@@ -28,9 +28,56 @@ import Calendar from 'react-pure-calendar';
     disabledDates={["20181208"]}
     minDate=""
     maxDate=""
+    currDateClass=""
+    selectedDateClass=""
     showToday={true}
     onSelect={(date) => console.log(date)}/>
 ```
+
+## Props
+
+#### format
+ - `String`
+ - `Required`
+ - Allowed Keys: All formats supported by [moment.js](http://momentjs.com/docs/#/parsing/string-format/)
+ 
+ ### defaultDate
+ - `String`
+ - To show a default Date
+ - Always enter in this format `YYYYMMDD`
+ 
+ ### disabledDays
+ - `Array` of days
+ - `0` - Sunday, `1` - Monday, `2` - Tuesday, `3` - Wednesday, `4` - Thursday, `5` - Friday, `6` - Saturday
+ 
+ ### disabledDates
+ - `Array` of dates
+ - Format `YYYYMMDD`
+ - The dates you want to disable
+ 
+ ### minDate
+ - Format `YYYYMMDD`
+ - Date from where user can select dates; before that all dates will be disabled
+ 
+ ### maxDate
+ - Format `YYYYMMDD`
+ - Date from where user cannot select dates; after that all dates will be disabled
+ 
+ ### currDateClass
+ - `String`
+ - class to style `current` date
+ 
+ ### selectedDateClass
+ - `String`
+ - class to style `selected` date
+ 
+ ### showToday
+ - `Boolean`
+ - Whether to show `Today` link
+ 
+ ### onSelect
+ - `Function`
+ - Returns a `Date`. You can pass your function use the Date.
 
 ## Dependencies
 

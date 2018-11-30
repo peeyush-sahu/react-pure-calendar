@@ -111,7 +111,15 @@ class Calendar extends Component {
 
     showCalendar = () => {
         const {currMonth, currYear, today, selectedDate} = this.state;
-        const {minDate, maxDate, format, disabledDays, disabledDates} = this.props;
+        const {
+            minDate,
+            maxDate,
+            format,
+            disabledDays,
+            disabledDates,
+            currDateClass,
+            selectedDateClass
+        } = this.props;
         let firstDay = new Date(currYear, currMonth).getDay();
         let daysInMonth = 32 - new Date(currYear, currMonth, 32).getDate();
         let tbl = document.getElementById("calendar-body");
@@ -135,8 +143,8 @@ class Calendar extends Component {
                         .classList
                         .add("c_cell");
 
-                    let CurrDate = moment(`${currYear},${currMonth + 1},${date}`);
                     if (minDate) {
+                        let CurrDate = moment(`${currYear},${currMonth + 1},${date}`);
                         let MinDate = moment(`${this.getFormattedDate(minDate).yr},${this.getFormattedDate(minDate).mt},${this.getFormattedDate(minDate).dt}`);
                         if (CurrDate < MinDate) {
                             cellDiv
@@ -146,6 +154,7 @@ class Calendar extends Component {
                     }
 
                     if (maxDate) {
+                        let CurrDate = moment(`${currYear},${currMonth + 1},${date}`);
                         let MaxDate = moment(`${this.getFormattedDate(maxDate).yr},${this.getFormattedDate(maxDate).mt},${this.getFormattedDate(maxDate).dt}`);
                         if (CurrDate > MaxDate) {
                             cellDiv
@@ -182,15 +191,28 @@ class Calendar extends Component {
                     }
 
                     if (date === today.getDate() && currYear === today.getFullYear() && currMonth === today.getMonth()) {
-                        cellDiv
-                            .classList
-                            .add("currDate");
+                        if (currDateClass) {
+                            cellDiv
+                                .classList
+                                .add(currDateClass);
+                        } else {
+                            cellDiv
+                                .classList
+                                .add("currDate");
+                        }
+
                     }
 
                     if (selectedDate && date === selectedDate && (parseInt(moment(this.props.defaultDate).format("M")) - 1) === currMonth && parseInt(moment(this.props.defaultDate).format("YYYY")) === currYear) {
-                        cellDiv
-                            .classList
-                            .add("selectedDate");
+                        if (selectedDateClass) {
+                            cellDiv
+                                .classList
+                                .add(selectedDateClass);
+                        } else {
+                            cellDiv
+                                .classList
+                                .add("selectedDate");
+                        }
                     }
 
                     let cellText = document.createTextNode(date);
