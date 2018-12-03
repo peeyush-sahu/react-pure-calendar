@@ -249,12 +249,12 @@ class Calendar extends Component {
     }
 
     showMonths = () => {
-        this.setState({showMonth: true});
+        this.setState({showMonth: true, showYear: false});
     };
 
     showYears = () => {
         const {currYear} = this.state;
-        this.setState({showYear: true});
+        this.setState({showYear: true, showMonth: false});
         let years = [];
         for (let i = 0; i < 12; i++) {
             years[i] = currYear + i;
@@ -327,7 +327,7 @@ class Calendar extends Component {
                     <div className="rowEnd">
                         {!showMonth && !showYear && <a href="#foo" className="link monthLink" onClick={this.showMonths}>{months[currMonth]}</a>}
                         {!showYear && <a href="#bar" className="link yearLink" onClick={this.showYears}>{currYear}</a>}
-                        {showYear && <a href="#bar" className="link yearLink" onClick={this.showYearsRange}>{`${yearsArr[0]} - ${yearsArr[11]}`}</a>}
+                        {showYear && <a href="#bar" className="link yearLink">{`${yearsArr[0]} - ${yearsArr[11]}`}</a>}
                     </div>
                     <div>
                         {!showMonth && !showYear && <button
