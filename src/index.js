@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import moment from 'moment';
+import moment from "moment";
 import "./styles.css";
 
 class Calendar extends Component {
@@ -45,7 +45,7 @@ class Calendar extends Component {
                 : currYear,
             currMonth: (currMonth + 1) % 12
         }, () => {
-            this.showCalendar()
+            this.showCalendar();
         });
     };
 
@@ -59,7 +59,7 @@ class Calendar extends Component {
                 ? 11
                 : currMonth - 1
         }, () => {
-            this.showCalendar()
+            this.showCalendar();
         });
     };
 
@@ -68,7 +68,7 @@ class Calendar extends Component {
         this.setState({
             currYear: currYear + 1
         }, () => {
-            this.showCalendar()
+            this.showCalendar();
         });
     };
 
@@ -77,7 +77,7 @@ class Calendar extends Component {
         this.setState({
             currYear: currYear - 1
         }, () => {
-            this.showCalendar()
+            this.showCalendar();
         });
     };
 
@@ -91,9 +91,9 @@ class Calendar extends Component {
         this.setState({
             yearsArr: years
         }, () => {
-            this.showCalendar()
+            this.showCalendar();
         });
-    }
+    };
 
     nextYears = () => {
         const {yearsArr} = this.state;
@@ -105,9 +105,9 @@ class Calendar extends Component {
         this.setState({
             yearsArr: years
         }, () => {
-            this.showCalendar()
+            this.showCalendar();
         });
-    }
+    };
 
     showCalendar = () => {
         const {currMonth, currYear, today, selectedDate} = this.state;
@@ -128,7 +128,6 @@ class Calendar extends Component {
         for (let i = 0; i < 6; i++) {
             let row = document.createElement("tr");
             for (let j = 0; j < 7; j++) {
-
                 if (i === 0 && j < firstDay) {
                     let cell = document.createElement("td");
                     let cellText = document.createTextNode("");
@@ -175,7 +174,7 @@ class Calendar extends Component {
 
                     if (disabledDates) {
                         for (let dd = 0; dd < disabledDates.length; dd++) {
-                            if (this.getFormattedDate(disabledDates[dd]).dt === date && (this.getFormattedDate(disabledDates[dd]).mt - 1) === currMonth && this.getFormattedDate(disabledDates[dd]).yr === currYear) {
+                            if (this.getFormattedDate(disabledDates[dd]).dt === date && this.getFormattedDate(disabledDates[dd]).mt - 1 === currMonth && this.getFormattedDate(disabledDates[dd]).yr === currYear) {
                                 cellDiv
                                     .classList
                                     .add("disabled");
@@ -200,10 +199,9 @@ class Calendar extends Component {
                                 .classList
                                 .add("currDate");
                         }
-
                     }
 
-                    if (selectedDate && date === selectedDate && (parseInt(moment(this.props.defaultDate).format("M")) - 1) === currMonth && parseInt(moment(this.props.defaultDate).format("YYYY")) === currYear) {
+                    if (selectedDate && date === selectedDate && parseInt(moment(this.props.defaultDate).format("M")) - 1 === currMonth && parseInt(moment(this.props.defaultDate).format("YYYY")) === currYear) {
                         if (selectedDateClass) {
                             cellDiv
                                 .classList
@@ -225,9 +223,9 @@ class Calendar extends Component {
 
             tbl.appendChild(row);
         }
-    }
+    };
 
-    getFormattedDate = (date) => {
+    getFormattedDate = date => {
         let dt = parseInt(`${date.split("")[6]}${date.split("")[7]}`);
         let mt = parseInt(`${date.split("")[4]}${date.split("")[5]}`);
         let yr = parseInt(`${date.split("")[0]}${date.split("")[1]}${date.split("")[2]}${date.split("")[3]}`);
@@ -235,18 +233,23 @@ class Calendar extends Component {
             dt,
             mt,
             yr
-        }
+        };
         return value;
-    }
+    };
 
     getValue = (val, format) => {
-        const {currMonth, currYear} = this.state;
+        let {currMonth, currYear} = this.state;
         const {onSelect} = this.props;
         if (val <= 1 || val <= 9) {
             val = `0${val}`;
         }
-        onSelect(moment(`${currYear}${currMonth + 1}${val}`).format(format));
-    }
+        if (currMonth <= 1 || currMonth <= 8) {
+            currMonth = `0${currMonth + 1}`;
+        } else {
+            currMonth = currMonth + 1;
+        }
+        onSelect(moment(`${currYear}${currMonth}${val}`).format(format));
+    };
 
     showMonths = () => {
         this.setState({showMonth: true, showYear: false});
@@ -260,27 +263,27 @@ class Calendar extends Component {
             years[i] = currYear + i;
         }
         this.setState({yearsArr: years});
-    }
+    };
 
-    setMonth = (val) => {
+    setMonth = val => {
         this.setState({
             currMonth: val,
             showMonth: false
         }, () => {
-            this.showCalendar()
+            this.showCalendar();
         });
-    }
+    };
 
-    setYear = (val) => {
+    setYear = val => {
         this.setState({
             currYear: val,
             showMonth: false,
             showYear: false,
             yearsArr: []
         }, () => {
-            this.showCalendar()
+            this.showCalendar();
         });
-    }
+    };
 
     showToday = () => {
         this.setState({
@@ -290,9 +293,9 @@ class Calendar extends Component {
             showYear: false,
             yearsArr: []
         }, () => {
-            this.showCalendar()
-        })
-    }
+            this.showCalendar();
+        });
+    };
 
     render() {
         const {
@@ -308,43 +311,54 @@ class Calendar extends Component {
             <div className="calendarCont">
                 <div className="calendarHeader">
                     <div>
-                        {!showYear && <button
+                        {!showYear && (<button
                             title="Previous Year"
                             className="btn"
                             id="prevYearBtn"
-                            onClick={this.previousYear}></button>}
-                        {!showMonth && !showYear && <button
+                            onClick={this.previousYear}/>)}
+                        {!showMonth && !showYear && (<button
                             title="Previous Month"
                             className="btn"
                             id="prevMonthBtn"
-                            onClick={this.previousMonth}></button>}
-                        {showYear && <button
+                            onClick={this.previousMonth}/>)}
+                        {showYear && (<button
                             title="Previous Years"
                             className="btn"
                             id="prevYearsBtn"
-                            onClick={this.previousYears}></button>}
+                            onClick={this.previousYears}/>)}
                     </div>
                     <div className="rowEnd">
-                        {!showMonth && !showYear && <a href="#foo" className="link monthLink" onClick={this.showMonths}>{months[currMonth]}</a>}
-                        {!showYear && <a href="#bar" className="link yearLink" onClick={this.showYears}>{currYear}</a>}
-                        {showYear && <a href="#bar" className="link yearLink">{`${yearsArr[0]} - ${yearsArr[11]}`}</a>}
+                        {!showMonth && !showYear && (
+                            <a href="#foo" className="link monthLink" onClick={this.showMonths}>
+                                {months[currMonth]}
+                            </a>
+                        )}
+                        {!showYear && (
+                            <a href="#bar" className="link yearLink" onClick={this.showYears}>
+                                {currYear}
+                            </a>
+                        )}
+                        {showYear && (
+                            <a href="#bar" className="link yearLink">{`${yearsArr[0]} - ${
+                                yearsArr[11]}`}</a>
+                        )}
                     </div>
                     <div>
-                        {!showMonth && !showYear && <button
+                        {!showMonth && !showYear && (<button
                             title="Next Month"
                             className="btn"
                             id="nextMonthBtn"
-                            onClick={this.nextMonth}></button>}
-                        {!showYear && <button
+                            onClick={this.nextMonth}/>)}
+                        {!showYear && (<button
                             title="Next Year"
                             className="btn"
                             id="nextYearBtn"
-                            onClick={this.nextYear}></button>}
-                        {showYear && <button
+                            onClick={this.nextYear}/>)}
+                        {showYear && (<button
                             title="Next Years"
                             className="btn"
                             id="nextYearsBtn"
-                            onClick={this.nextYears}></button>}
+                            onClick={this.nextYears}/>)}
                     </div>
                 </div>
                 <div className="calendarBody">
@@ -362,7 +376,8 @@ class Calendar extends Component {
                                 onClick={() => this.setYear(y)}>
                                 <span>{y}</span>
                             </a>
-                        ))}</div>
+                        ))}
+                    </div>
                     <div
                         className={showMonth
                         ? "monthsCont show"
@@ -391,10 +406,14 @@ class Calendar extends Component {
                                 <th>Sa</th>
                             </tr>
                         </thead>
-                        <tbody id="calendar-body"></tbody>
+                        <tbody id="calendar-body"/>
                     </table>
                 </div>
-                {showToday && <div className="todayCont" onClick={this.showToday}>Today</div>}
+                {showToday && (
+                    <div className="todayCont" onClick={this.showToday}>
+                        Today
+                    </div>
+                )}
             </div>
         );
     }
